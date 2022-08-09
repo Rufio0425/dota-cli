@@ -7,8 +7,12 @@ mod dota_apis;
 mod ascii_image;
 
 #[derive(Parser,Default,Debug)]
+#[clap(author = "sean_aguirre", version = "1.0.0", about = "A cli application for obtaining Dota 2 information")]
 struct Cli {
-    request: String
+    request: String,
+
+    #[clap(short, long, value_parser, default_value_t = 0)]
+    hero_id: u8
 }
 
 const DEFAULT_MAX_WIDTH: u32 = 100;
@@ -24,8 +28,11 @@ fn main() {
         },
         "get-pudge" => {
             // dota_apis::get_pudge(); Will parse response from get_all_heros and find pudge
-            let ascii_image = convert_file(&"src/pudge.png".to_string(), Some(100));
+            let ascii_image = convert_file(&"images/pudge.png".to_string(), Some(100));
             ascii_image.print();
+        },
+        "get-hero-by-id" => {
+            println!("Get hero {:?}", cli.hero_id);
         },
         _ => {
             println!("Improper request");

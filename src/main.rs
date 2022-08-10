@@ -79,3 +79,14 @@ fn convert_file(filepath: &String, width: Option<u32>) -> AsciiImage {
 
     ascii_image
 }
+
+#[test]
+fn test_get_output_dimensions() {
+    assert_eq!(
+        get_output_dimensions(
+            (100, 100), 
+            100
+        ), 
+        (100, 100)
+    );
+}
